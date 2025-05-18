@@ -1,0 +1,6 @@
+[submodule "2ch"]
+	path = 2ch
+	url = https://github.com/diademoff/2ch
+[submodule "dvach"]
+	path = dvach
+	url = https://github.com/interceo/dvach
