@@ -40,7 +40,7 @@ def snapshot_board(board='b'):
         try:
             thread.update_posts()
         except Exception:
-            continue  # Иногда тред может быть битым
+            continue
 
         op_post = thread.get_op_post.comment
         subject = thread.subject or ""
@@ -64,12 +64,11 @@ def snapshot_board(board='b'):
             'posts_count': posts_count,
             'op_post_count': op_post_count,
             'op_reply_ratio': op_reply_ratio,
-            **features
+            **features  # 15 минут в секундах
         }
 
         print(f'save thread {thread_num}, op_reply_ratio: {op_reply_ratio}')
 
-    # Чтение старых данных
     existing_data = {}
     if os.path.exists(const.CSV_FILE):
         with open(const.CSV_FILE, 'r', newline='', encoding='utf-8') as csvfile:
@@ -77,10 +76,8 @@ def snapshot_board(board='b'):
             for row in reader:
                 existing_data[row['thread_num']] = row
 
-    # Обновляем или добавляем строки
     existing_data.update(updated_data)
 
-    # Перезапись CSV
     with open(const.CSV_FILE, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=const.FIELDNAMES)
         writer.writeheader()
@@ -96,4 +93,4 @@ if __name__ == '__main__':
             snapshot_board('b')
         except Exception as e:
             print(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Error: {e}")
-        time.sleep(15 * 60)  # 15 минут в секундах
+        time.sleep(15 * 60)
