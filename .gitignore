@@ -1,4 +1,6 @@
 __pycache__/
 .vscode/
 .venv
-dvach_snapshot.csv
+threads/
+*.csv
+*.png

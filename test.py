@@ -3,6 +3,7 @@ import hashlib
 import time
 import datetime
 import difflib
+import json
 from collections import defaultdict, Counter
 import os
 
@@ -61,6 +62,7 @@ def snapshot_board(board='b'):
             'last_seen': snapshot_time,
             'thread_num': thread_num,
             'title': title,
+            'subtitle': subject,
             'posts_count': posts_count,
             'op_post_count': op_post_count,
             'op_reply_ratio': op_reply_ratio,
@@ -68,6 +70,12 @@ def snapshot_board(board='b'):
         }
 
         print(f'save thread {thread_num}, op_reply_ratio: {op_reply_ratio}')
+
+        json_dir = 'threads'
+        os.makedirs(json_dir, exist_ok=True)
+        thread_path = os.path.join(json_dir, f"{thread_num}.json")
+        with open(thread_path, 'w', encoding='utf-8') as f:
+            json.dump(json.loads(thread.json_download()), f, ensure_ascii=False, indent=2)
 
     existing_data = {}
     if os.path.exists(const.CSV_FILE):
@@ -89,6 +97,7 @@ def snapshot_board(board='b'):
 
 if __name__ == '__main__':
     while True:
+        snapshot_board('b')
         try:
             snapshot_board('b')
         except Exception as e:
