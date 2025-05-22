@@ -97,7 +97,6 @@ def snapshot_board(board='b'):
 
 if __name__ == '__main__':
     while True:
-        snapshot_board('b')
         try:
             snapshot_board('b')
         except Exception as e:
