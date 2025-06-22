@@ -15,7 +15,7 @@ import os
 from collections import Counter, defaultdict
 
 # Создаем папку для сохранения результатов
-os.makedirs('stats', exist_ok=True)
+os.makedirs('simular', exist_ok=True)
 
 # Настройки визуализации
 sns.set(style='darkgrid', font_scale=1.1)

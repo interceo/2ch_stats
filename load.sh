@@ -1,0 +1,1 @@
+scp -r tg_bot:/home/tg_bot/2ch_stats/threads /home/interceo/projects/2ch_stats/threads
